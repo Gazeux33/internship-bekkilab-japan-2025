@@ -27,6 +27,7 @@ dependencies:
 - cassava
 - vector
 - time
+- nlp-tools
 
 ghc-options:
 - -Wall

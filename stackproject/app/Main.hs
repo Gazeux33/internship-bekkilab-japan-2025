@@ -1,12 +1,11 @@
-
-
 module Main where
 
-import LoadData (loadCSV, dataToTensors,createDataset,createDataloader,Dataloader,processEval)
-import Model (MLPSpec(..), processTrain)
+import LoadData (loadCSV, dataToTensors,createDataset,createDataloader,Dataloader)
+import Model (MLPSpec(..), processTrain,processEval)
 import Torch
 import Data.Vector()
 import Data.Either() 
+
 
 
 batchSize :: Int 
@@ -32,18 +31,25 @@ main :: IO ()
 main = do
     putStrLn "Start..."
     trainData <- loadData "data/train.csv"
-    case trainData of
-        Left err -> putStrLn $ "Erreur de chargement CSV: " ++ err
+    
+    -- Initialize the model outside the case blocks
+    initialModel <- sample (MLPSpec 7 16 8 1)
+    let optimizer = GD
+    let lr = 0.00001
+    
+    -- Variable to hold the trained model
+    trainedModel <- case trainData of
+        Left err -> do
+            putStrLn $ "Erreur de chargement CSV: " ++ err
+            return initialModel  -- Return the untrained model in case of error
         Right dataloader -> do
             putStrLn $ " train dataloader size:  " ++ show (length dataloader)
-            model <- sample (MLPSpec 7 8 4 1)
-            let optimizer = GD
-            let lr = 0.00001
-
+            
             putStrLn $ "Start Train"
-            (model,loss) <- processTrain dataloader model optimizer lr
+            (model, loss) <- processTrain dataloader initialModel optimizer lr 5
             putStrLn $ "End Train"
-
+            return model  -- Return the trained model
+    
     evalData <- loadData "data/eval.csv"
     case evalData of
         Left err -> putStrLn $ "Erreur de chargement CSV: " ++ err
@@ -51,12 +57,7 @@ main = do
             putStrLn $ "eval dataloader size:  " ++ show (length dataloader)
 
             putStrLn $ "Start eval"
-            (model,loss) <- processEval dataloader model optimizer lr
+            processEval dataloader trainedModel  -- Use the trained model here
             putStrLn $ "End eval"
 
-    
-                
-
     putStrLn $ "End....  "
-
-

@@ -4,7 +4,7 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module Model
-    ( MLPSpec(..),processTrain
+    ( MLPSpec(..),processTrain,processEval
 
     ) where
 
@@ -47,7 +47,7 @@ instance Randomizable MLPSpec MLP where
 mlp :: MLP -> Tensor -> Tensor
 mlp MLP {..} =
 
-    linear l2 . relu . linear l1 . relu . linear l0
+    linear l2  . linear l1  . linear l0
 
 
 processBatch :: Optimizer o => MLP -> o -> Float -> (Tensor, Tensor) -> IO (MLP, Float)
@@ -59,25 +59,31 @@ processBatch model optimizer lr (input, label) = do
 
 
 evalBatch :: MLP  -> (Tensor, Tensor) -> Float
-evalBatch model optimizer lr (input, label) = do
-  let output = mlp model input
-  let loss = FI.mse_loss output label 1  
-  (newModel, _) <- runStep model optimizer loss (realToFrac lr)  
-  pure (newModel, asValue loss)
+evalBatch model  (input, label) = asValue $ FI.mse_loss output label 1  
+    where output = mlp model input
+
   
 
 
-processTrain :: Optimizer o => [(Tensor, Tensor)] -> MLP -> o -> Float -> IO (MLP, Float)
-processTrain dataloader model optimizer lr = do
-  foldM (\(m, _) (i, batch) -> do
-            (newModel, loss) <- processBatch m optimizer lr batch
-            putStrLn $ "Batch " ++ show i ++ " : loss : " ++ show loss
-            pure (newModel, loss)
-        ) (model, 0.0) (zip [1..] dataloader)
+processTrainEpoch :: Optimizer o => [(Tensor, Tensor)] -> MLP -> o -> Float -> Int -> IO (MLP, Float)
+processTrainEpoch dataloader model optimizer lr epoch = do
+    putStrLn $ "Starting Epoch " ++ show epoch
+    foldM (\(m', _) (i, batch) -> do
+                        (newModel, loss) <- processBatch m' optimizer lr batch
+                        putStrLn $ "Epoch " ++ show epoch ++ ", Batch " ++ show i ++ " : loss : " ++ show loss
+                        pure (newModel, loss)
+                ) (model, 0.0) (zip [1..] dataloader)
 
+processTrain :: Optimizer o => [(Tensor, Tensor)] -> MLP -> o -> Float -> Int -> IO (MLP, Float)
+processTrain dataloader model optimizer lr epochs = do
+    foldM (\(m, _) epoch -> processTrainEpoch dataloader m optimizer lr epoch) (model, 0.0) [1..epochs]
 
-processEval  ::  [(Tensor, Tensor)] -> MLP
-processEval dataloader = do
+processEval :: [(Tensor, Tensor)] -> MLP -> IO ()
+processEval dataloader model = do
+    mapM_ (\(i, batch) -> do
+                        let loss = evalBatch model batch
+                        putStrLn $ "Batch " ++ show i ++ " : loss : " ++ show loss
+                ) (zip [1..] dataloader)
 
 
 

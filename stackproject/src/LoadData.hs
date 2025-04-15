@@ -84,6 +84,9 @@ createDataloader dataset batchSize =
                 inputBatch = stackTensors inputs 
                 targetBatch = Torch.squeezeDim 1 (stackTensors targets)
             in (inputBatch, targetBatch)
+
+
+
             
 
 dataToTensors :: V.Vector DataRow -> Tensor
