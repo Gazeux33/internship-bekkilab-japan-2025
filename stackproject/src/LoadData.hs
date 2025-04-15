@@ -4,6 +4,9 @@ module LoadData
     , dataToTensors
     , createDataloader
     , createDataset
+    , Dataloader
+    , MyDataset
+    , Batch
     ) where
 
 
@@ -15,6 +18,10 @@ import qualified Data.Vector as V
 import Data.Time (UTCTime) 
 import Data.Time.Format (parseTimeM, defaultTimeLocale)
 import Data.ByteString.Char8 (unpack)
+
+type Dataloader = [(Tensor, Tensor)]
+type MyDataset = [(Tensor, Tensor)]
+type Batch = (Tensor, Tensor)
 
 instance Csv.FromField UTCTime where
     parseField bs = case parseTimeM True defaultTimeLocale "%Y/%-m/%-d" (unpack bs) of
@@ -42,29 +49,43 @@ loadCSV filePath = do
     return $ Csv.decode Csv.HasHeader csvData
 
 
+
+
 createInput :: Tensor -> Int -> [Tensor]
-createInput tensor winSize = [ FI.slice tensor 0 i (i + winSize) 1 | i <- [0 .. size 0 tensor - winSize] ]
+createInput tensor winSize =
+    [ Torch.squeezeAll $ FI.slice tensor 0 i (i + winSize) 1 | i <- [0 .. Torch.size 0 tensor - winSize] ]
 
 
 createTarget :: Tensor -> Int -> [Tensor]
-createTarget tensor winSize = [ FI.slice tensor 0 i (i + 1) 1 | i <- [winSize .. size 0 tensor - 1] ]
+createTarget tensor winSize = [ FI.slice tensor 0 (i + winSize) (i + winSize + 1) 1 | i <- [0 .. Torch.size 0 tensor - winSize - 1] ]
 
 
-createDataset :: Tensor -> Int -> [(Tensor, Tensor)]
+createDataset :: Tensor -> Int -> MyDataset
 createDataset tensor winSize = zip (createInput tensor winSize) (createTarget tensor winSize)
 
 
-createDataloader :: [(Tensor, Tensor)] -> Int -> [[(Tensor, Tensor)]]
-createDataloader dataset batchSize = 
-    chunks dataset
+chunksOf :: Int -> [a] -> [[a]]
+chunksOf _ [] = []
+chunksOf n xs = let (chunk, rest) = splitAt n xs in chunk : chunksOf n rest
+
+
+stackTensors :: [Tensor] -> Tensor
+stackTensors ts = Torch.stack (Dim 0) ts
+
+
+
+createDataloader :: MyDataset -> Int -> Dataloader
+createDataloader dataset batchSize =
+    map processBatch (filter (\chunk -> length chunk == batchSize) (chunksOf batchSize dataset))
     where
-        chunks [] = []
-        chunks xs 
-            | length xs >= batchSize = Prelude.take batchSize xs : chunks (drop batchSize xs)
-            | otherwise = []
+        processBatch batch =
+            let inputs = map fst batch  
+                targets = map snd batch 
+                inputBatch = stackTensors inputs 
+                targetBatch = Torch.squeezeDim 1 (stackTensors targets)
+            in (inputBatch, targetBatch)
             
 
-    
 dataToTensors :: V.Vector DataRow -> Tensor
 dataToTensors records = 
     let features = map (\r -> [realToFrac (meanTemp r) :: Float]) (V.toList records)

@@ -1,9 +1,12 @@
+
+
 module Main where
 
-import LoadData (loadCSV, dataToTensors,createDataset,createDataloader)
+import LoadData (loadCSV, dataToTensors,createDataset,createDataloader,Dataloader,processEval)
+import Model (MLPSpec(..), processTrain)
 import Torch
 import Data.Vector()
-import Data.Either()
+import Data.Either() 
 
 
 batchSize :: Int 
@@ -12,7 +15,7 @@ batchSize = 16
 winSize :: Int
 winSize = 7
 
-loadData :: String -> IO (Either String [[(Tensor, Tensor)]])
+loadData :: String -> IO (Either String Dataloader)
 loadData filePath = do
     csvResult <- loadCSV filePath
     case csvResult of
@@ -28,10 +31,32 @@ loadData filePath = do
 main :: IO ()
 main = do
     putStrLn "Start..."
-    dataResult <- loadData "data/eval.csv"
-    case dataResult of
+    trainData <- loadData "data/train.csv"
+    case trainData of
         Left err -> putStrLn $ "Erreur de chargement CSV: " ++ err
         Right dataloader -> do
-            putStrLn $ "dataloader size:  " ++ show (length dataloader)
+            putStrLn $ " train dataloader size:  " ++ show (length dataloader)
+            model <- sample (MLPSpec 7 8 4 1)
+            let optimizer = GD
+            let lr = 0.00001
+
+            putStrLn $ "Start Train"
+            (model,loss) <- processTrain dataloader model optimizer lr
+            putStrLn $ "End Train"
+
+    evalData <- loadData "data/eval.csv"
+    case evalData of
+        Left err -> putStrLn $ "Erreur de chargement CSV: " ++ err
+        Right dataloader -> do
+            putStrLn $ "eval dataloader size:  " ++ show (length dataloader)
+
+            putStrLn $ "Start eval"
+            (model,loss) <- processEval dataloader model optimizer lr
+            putStrLn $ "End eval"
+
+    
+                
+
+    putStrLn $ "End....  "
 
 
