@@ -5,6 +5,7 @@ import Model (MLPSpec(..), processTrain,processEval)
 import Torch
 import Data.Vector()
 import Data.Either() 
+import Torch.Serialize (saveParams,loadParams)
 
 
 
@@ -13,6 +14,12 @@ batchSize = 16
 
 winSize :: Int
 winSize = 7
+
+loadModel :: Bool
+loadModel = True
+
+savePath :: FilePath
+savePath = "output/trainedModel"
 
 loadData :: String -> IO (Either String Dataloader)
 loadData filePath = do
@@ -32,10 +39,11 @@ main = do
     putStrLn "Start..."
     trainData <- loadData "data/train.csv"
     
-    -- Initialize the model outside the case blocks
-    initialModel <- sample (MLPSpec 7 16 8 1)
+    initialModel <- sample (MLPSpec 7 16 8 1) 
     let optimizer = GD
     let lr = 0.00001
+
+    initialModel <- if loadModel then loadParams initialModel savePath else return initialModel
     
     -- Variable to hold the trained model
     trainedModel <- case trainData of
@@ -46,7 +54,7 @@ main = do
             putStrLn $ " train dataloader size:  " ++ show (length dataloader)
             
             putStrLn $ "Start Train"
-            (model, loss) <- processTrain dataloader initialModel optimizer lr 5
+            (model, loss) <- processTrain dataloader initialModel optimizer lr 2
             putStrLn $ "End Train"
             return model  -- Return the trained model
     
@@ -59,5 +67,8 @@ main = do
             putStrLn $ "Start eval"
             processEval dataloader trainedModel  -- Use the trained model here
             putStrLn $ "End eval"
+
+
+    saveParams trainedModel savePath
 
     putStrLn $ "End....  "
