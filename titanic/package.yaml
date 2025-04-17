@@ -23,6 +23,10 @@ dependencies:
 - base >= 4.7 && < 5
 - hasktorch
 - hasktorch-tools
+- bytestring
+- cassava
+- vector
+- split
 
 ghc-options:
 - -Wall

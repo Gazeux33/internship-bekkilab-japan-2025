@@ -45,18 +45,17 @@ main = do
 
     initialModel <- if loadModel then loadParams initialModel savePath else return initialModel
     
-    -- Variable to hold the trained model
     trainedModel <- case trainData of
         Left err -> do
             putStrLn $ "Erreur de chargement CSV: " ++ err
-            return initialModel  -- Return the untrained model in case of error
+            return initialModel  
         Right dataloader -> do
             putStrLn $ " train dataloader size:  " ++ show (length dataloader)
             
             putStrLn $ "Start Train"
             (model, loss) <- processTrain dataloader initialModel optimizer lr 2
             putStrLn $ "End Train"
-            return model  -- Return the trained model
+            return model  
     
     evalData <- loadData "data/eval.csv"
     case evalData of
@@ -65,7 +64,7 @@ main = do
             putStrLn $ "eval dataloader size:  " ++ show (length dataloader)
 
             putStrLn $ "Start eval"
-            processEval dataloader trainedModel  -- Use the trained model here
+            processEval dataloader trainedModel  
             putStrLn $ "End eval"
 
 

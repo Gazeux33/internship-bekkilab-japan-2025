@@ -1,8 +1,0 @@
-services:
-  hasktorch:
-    build: .
-    ports:
-      - "8889:8888"
-    command: jupyter lab --ip 0.0.0.0 --NotebookApp.token='test'
-    volumes:
-      - /Users/theocastillo/Documents/internship-bekkilab-japan-2025/:/home/ubuntu/internship-bekkilab-japan-2025/
