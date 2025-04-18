@@ -17,12 +17,14 @@ import qualified Data.Vector as V
 
 
 
-
+-- PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
 
 -- Survived,Pclass,Sex,Age,SibSp,Parch,Fare,Embarked
 data DataRow = DataRow {
+    PassengerId :: Int
     survived :: Int,
    pClass :: Int,
+   Name :: String,
    sex :: Int,
    age:: Int,
    sibSp :: Int,

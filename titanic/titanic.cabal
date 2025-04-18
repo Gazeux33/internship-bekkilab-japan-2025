@@ -25,9 +25,9 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
       LoadData
       Model
+      Preprocess
   other-modules:
       Paths_titanic
   autogen-modules:
