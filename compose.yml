@@ -1,0 +1,5 @@
+services:
+  hasktorch:
+    build: .
+    volumes:
+      - /Users/theocastillo/Documents/new_repo/:/home/ubuntu/new_repo/
