@@ -4,11 +4,11 @@ cabal-version: 2.2
 --
 -- see: https://github.com/sol/hpack
 
-name:           Session3Multiple
+name:           Session4AND
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/Session3Multiple#readme>
-homepage:       https://github.com/githubuser/Session3Multiple#readme
-bug-reports:    https://github.com/githubuser/Session3Multiple/issues
+description:    Please see the README on GitHub at <https://github.com/githubuser/Session4AND#readme>
+homepage:       https://github.com/githubuser/Session4AND#readme
+bug-reports:    https://github.com/githubuser/Session4AND/issues
 author:         Author name here
 maintainer:     example@example.com
 copyright:      2025 Author name here
@@ -19,14 +19,14 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/Session3Multiple
+  location: https://github.com/githubuser/Session4AND
 
-executable Session3Multiple-exe
+executable Session4AND-exe
   main-is: Main.hs
   other-modules:
-      Paths_Session3Multiple
+      Paths_Session4AND
   autogen-modules:
-      Paths_Session3Multiple
+      Paths_Session4AND
   hs-source-dirs:
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N

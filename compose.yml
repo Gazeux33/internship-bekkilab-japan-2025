@@ -2,4 +2,4 @@ services:
   hasktorch:
     build: .
     volumes:
-      - /Users/theocastillo/Documents/new_repo/:/home/ubuntu/new_repo/
+      - /Users/theocastillo/Documents/internship-bekkilab-japan-2025/:/home/ubuntu/internship-bekkilab-japan-2025/

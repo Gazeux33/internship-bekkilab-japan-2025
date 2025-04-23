@@ -1,6 +1,6 @@
-name:                Session3Graduate
+name:                Session4AND
 version:             0.1.0.0
-github:              "githubuser/Session3Graduate"
+github:              "githubuser/Session4AND"
 license:             BSD-3-Clause
 author:              "Author name here"
 maintainer:          "example@example.com"
@@ -16,19 +16,10 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/Session3Graduate#readme>
+description:         Please see the README on GitHub at <https://github.com/githubuser/Session4AND#readme>
 
 dependencies:
 - base >= 4.7 && < 5
-- hasktorch
-- hasktorch-tools
-- bytestring
-- cassava
-- vector
-- nlp-tools
-
-library:
-  source-dirs: src
 
 ghc-options:
 - -Wall
@@ -42,8 +33,9 @@ ghc-options:
 - -Wredundant-constraints
 
 
+
 executables:
-  Session3Graduate-exe:
+  Session4AND-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -51,6 +43,6 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - Session3Graduate
-
+    - base >= 4.7 && < 5
+    - hasktorch
 

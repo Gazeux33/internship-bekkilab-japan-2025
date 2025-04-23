@@ -20,6 +20,7 @@ $$
 $$
 \frac{\partial \text{MSE}}{\partial b} = \frac{2}{n} \sum_{i=1}^{n} (a x_i + b - y_i)
 $$
+
 ---
 
 #### MSE Loss : 

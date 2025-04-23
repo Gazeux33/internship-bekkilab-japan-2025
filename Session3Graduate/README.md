@@ -6,6 +6,8 @@
 docker compose exec hasktorch /bin/bash -c "cd /home/ubuntu/new_repo/ && stack run Session3Graduate"
 ```
 
+```X``` = GRE Score        ```Y``` = TOEFL Score
+
 ## Results 
 
 ```bash
