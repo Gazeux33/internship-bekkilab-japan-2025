@@ -5,7 +5,7 @@ flags: {}
 
 
 packages:
-  - Session4AND
+  - Session4NAND
 
 extra-include-dirs:
   - /home/ubuntu/libraries/hasktorch/deps/libtorch/include/torch/csrc/api/include
