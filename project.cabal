@@ -1,0 +1,158 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.38.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           project
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/project#readme>
+homepage:       https://github.com/githubuser/project#readme
+bug-reports:    https://github.com/githubuser/project/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2025 Author name here
+license:        BSD-3-Clause
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/project
+
+executable session3-admission
+  main-is: AdmissionChances.hs
+  other-modules:
+      Data
+      Model
+      Paths_project
+  autogen-modules:
+      Paths_project
+  hs-source-dirs:
+      Session3/AdmissionChances
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010
+
+executable session3-graduate
+  main-is: Graduate.hs
+  other-modules:
+      Data
+      Model
+      Paths_project
+  autogen-modules:
+      Paths_project
+  hs-source-dirs:
+      Session3/Graduate
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010
+
+executable session3-linear-regression
+  main-is: Session3/LinearRegression/LinearRegression.hs
+  other-modules:
+      Paths_project
+  autogen-modules:
+      Paths_project
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010
+
+executable session3-multiple-x
+  main-is: Session3/MultipleX/MultipleX.hs
+  other-modules:
+      Paths_project
+  autogen-modules:
+      Paths_project
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010
+
+executable session4-and
+  main-is: Session4/AND.hs
+  other-modules:
+      Paths_project
+  autogen-modules:
+      Paths_project
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010
+
+executable session4-nand
+  main-is: Session4/NAND.hs
+  other-modules:
+      Paths_project
+  autogen-modules:
+      Paths_project
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010
+
+executable session4-xor
+  main-is: Session4/XOR.hs
+  other-modules:
+      Paths_project
+  autogen-modules:
+      Paths_project
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010

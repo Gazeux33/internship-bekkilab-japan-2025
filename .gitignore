@@ -1,0 +1,5 @@
+.DS_Store
+.stack-work/
+*.csv
+.ipynb_checkpoints/
+.vscode/
