@@ -156,3 +156,25 @@ executable session4-xor
     , split
     , vector
   default-language: Haskell2010
+
+executable session5-titanic
+  main-is: Titanic.hs
+  other-modules:
+      LoadData
+      Model
+      Paths_project
+  autogen-modules:
+      Paths_project
+  hs-source-dirs:
+      Session5/Titanic
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , vector
+  default-language: Haskell2010

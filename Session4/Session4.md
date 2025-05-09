@@ -45,22 +45,80 @@ Final weights: Tensor Float [1] [ 0.2132   ], Tensor Float [1] [ 0.1610   ], Ten
 docker compose exec hasktorch /bin/bash -c "cd /home/ubuntu/internship-bekkilab-japan-2025/ && stack run sesssion4-nand"
 ```
 
+**lr** = ```1e-1 ```
+
+**epochs** =``` 1500```
+
+### Tanh 
 ```bash
-Epoc:  100  --->  Loss: 2.444038
-Epoc:  200  --->  Loss: 2.409053
-Epoc:  300  --->  Loss: 2.373184
-Epoc:  400  --->  Loss: 2.290671
-Epoc:  500  --->  Loss: 2.129993
-Epoc:  600  --->  Loss: 1.930902
-Epoc:  700  --->  Loss: 1.744073
-Epoc:  800  --->  Loss: 1.532837
-Epoc:  900  --->  Loss: 0.889003
-Epoc: 1000  --->  Loss: 0.377688
-[1.0,1.0]: Tensor Float []  0.1515   
-[1.0,0.0]: Tensor Float []  0.8228   
-[0.0,1.0]: Tensor Float []  0.7926   
-[0.0,0.0]: Tensor Float []  0.2508  
+Epoc:  100  --->  Loss: 1.799714
+Epoc:  200  --->  Loss: 0.152960
+Epoc:  300  --->  Loss: 0.055934
+Epoc:  400  --->  Loss: 0.032687
+Epoc:  500  --->  Loss: 0.022751
+Epoc:  600  --->  Loss: 0.017329
+Epoc:  700  --->  Loss: 0.013941
+Epoc:  800  --->  Loss: 0.011635
+Epoc:  900  --->  Loss: 0.009968
+Epoc: 1000  --->  Loss: 0.008709
+Epoc: 1100  --->  Loss: 0.007727
+Epoc: 1200  --->  Loss: 0.006939
+Epoc: 1300  --->  Loss: 0.006294
+Epoc: 1400  --->  Loss: 0.005757
+Epoc: 1500  --->  Loss: 0.005303
+[1.0,1.0]: Tensor Float []  2.3680e-2
+[1.0,0.0]: Tensor Float []  0.9774   
+[0.0,1.0]: Tensor Float []  0.9719   
+[0.0,0.0]: Tensor Float []  1.5993e-2 
 ```
+
+### Sigmoid
+```bash
+Epoc:  100  --->  Loss: 2.424500
+Epoc:  200  --->  Loss: 2.402122
+Epoc:  300  --->  Loss: 2.391043
+Epoc:  400  --->  Loss: 2.372428
+Epoc:  500  --->  Loss: 2.309883
+Epoc:  600  --->  Loss: 2.110009
+Epoc:  700  --->  Loss: 1.795820
+Epoc:  800  --->  Loss: 1.526996
+Epoc:  900  --->  Loss: 1.158576
+Epoc: 1000  --->  Loss: 0.609225
+Epoc: 1100  --->  Loss: 0.285158
+Epoc: 1200  --->  Loss: 0.162313
+Epoc: 1300  --->  Loss: 0.108045
+Epoc: 1400  --->  Loss: 0.079228
+Epoc: 1500  --->  Loss: 0.061824
+[1.0,1.0]: Tensor Float []  6.8059e-2
+[1.0,0.0]: Tensor Float []  0.9349   
+[0.0,1.0]: Tensor Float []  0.9120   
+[0.0,0.0]: Tensor Float []  9.9003e-2
+```
+
+### Relu
+
+```bash
+Epoc:  100  --->  Loss: 2.500000
+Epoc:  200  --->  Loss: 2.500000
+Epoc:  300  --->  Loss: 2.500000
+Epoc:  400  --->  Loss: 2.500000
+Epoc:  500  --->  Loss: 2.500000
+Epoc:  600  --->  Loss: 2.500000
+Epoc:  700  --->  Loss: 2.500000
+Epoc:  800  --->  Loss: 2.500000
+Epoc:  900  --->  Loss: 2.500000
+Epoc: 1000  --->  Loss: 2.500000
+Epoc: 1100  --->  Loss: 2.500000
+Epoc: 1200  --->  Loss: 2.500000
+Epoc: 1300  --->  Loss: 2.500000
+Epoc: 1400  --->  Loss: 2.500000
+Epoc: 1500  --->  Loss: 2.500000
+[1.0,1.0]: Tensor Float []  0.5000   
+[1.0,0.0]: Tensor Float []  0.5000   
+[0.0,1.0]: Tensor Float []  0.5000   
+[0.0,0.0]: Tensor Float []  0.5000 
+```
+
 
 ## XOR
 
@@ -68,4 +126,4 @@ Epoc: 1000  --->  Loss: 0.377688
 docker compose exec hasktorch /bin/bash -c "cd /home/ubuntu/internship-bekkilab-japan-2025/ && stack run sesssion4-xor"
 ```
 
-Only the forward 
+Only the forward propagation

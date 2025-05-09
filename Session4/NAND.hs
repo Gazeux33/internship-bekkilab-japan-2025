@@ -24,9 +24,9 @@ trainingData = take 10 $ cycle [([1,1],0),([1,0],1),([0,1],1),([0,0],0)]
 
 main :: IO()
 main = do
-  let iter = 1000::Int
+  let iter = 1500::Int
       device = Device CPU 0
-      hypParams = MLPHypParams device 2 [(3,Sigmoid),(1,Sigmoid)]
+      hypParams = MLPHypParams device 2 [(3,Relu),(1,Sigmoid)]
   initModel <- sample hypParams
   ((trainedModel,_),losses) <- mapAccumM [1..iter] (initModel,GD) $ \epoc (model,opt) -> do
     let loss = sumTensors $ for trainingData $ \(input,output) ->
@@ -37,7 +37,6 @@ main = do
     showLoss 100 epoc lossValue 
     u <- update model opt loss 1e-1
     return (u, lossValue)
-  drawLearningCurve "graph-xor.png" "Learning Curve" [("",reverse losses)]
   forM_ ([[1,1],[1,0],[0,1],[0,0]::[Float]]) $ \input -> do
     putStr $ show $ input
     putStr ": "
