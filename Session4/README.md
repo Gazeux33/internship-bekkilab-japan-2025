@@ -6,11 +6,13 @@
 docker compose exec hasktorch /bin/bash -c "cd /home/ubuntu/internship-bekkilab-japan-2025/ && stack run session4-and"
 ```
 
+```bash
+docker compose exec hasktorch /bin/bash -c "sudo apt update -y && sudo apt install -y gnuplot"
+```
+
 **lr** = ```0.1 ```
 
 **epochs** =``` 20```
-
-### Launch the programm 
 
 ```bash
 Training perceptron for AND gate
@@ -45,11 +47,15 @@ Final weights: Tensor Float [1] [ 0.2132   ], Tensor Float [1] [ 0.1610   ], Ten
 docker compose exec hasktorch /bin/bash -c "cd /home/ubuntu/internship-bekkilab-japan-2025/ && stack run sesssion4-nand"
 ```
 
+
+
+### Training
+
 **lr** = ```1e-1 ```
 
 **epochs** =``` 1500```
 
-### Tanh 
+#### Tanh 
 ```bash
 Epoc:  100  --->  Loss: 1.799714
 Epoc:  200  --->  Loss: 0.152960
@@ -72,7 +78,7 @@ Epoc: 1500  --->  Loss: 0.005303
 [0.0,0.0]: Tensor Float []  1.5993e-2 
 ```
 
-### Sigmoid
+#### Sigmoid
 ```bash
 Epoc:  100  --->  Loss: 2.424500
 Epoc:  200  --->  Loss: 2.402122
@@ -95,7 +101,7 @@ Epoc: 1500  --->  Loss: 0.061824
 [0.0,0.0]: Tensor Float []  9.9003e-2
 ```
 
-### Relu
+#### Relu
 
 ```bash
 Epoc:  100  --->  Loss: 2.500000

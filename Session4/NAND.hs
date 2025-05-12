@@ -37,6 +37,7 @@ main = do
     showLoss 100 epoc lossValue 
     u <- update model opt loss 1e-1
     return (u, lossValue)
+  drawLearningCurve "graph-xor.png" "Learning Curve" [("",reverse losses)]
   forM_ ([[1,1],[1,0],[0,1],[0,0]::[Float]]) $ \input -> do
     putStr $ show $ input
     putStr ": "
