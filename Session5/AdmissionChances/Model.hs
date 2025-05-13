@@ -67,6 +67,17 @@ processTest model dataloader = do
                       return $ asValue loss) dataloader
     return $ sum losses / fromIntegral (length losses)
 
+
+-- bidju hidjam
+
+finalPrediction :: MLP -> [(Tensor, Tensor)] -> (Tensor, Tensor) -- list of target list of pred  for all batches
+finalPrediction model batches = 
+  let inputs       = map fst batches
+      targets      = map snd batches
+      targetsCat   = F.flattenAll $ FI.cat targets 0 
+      predsCat     = F.flattenAll $ FI.cat (map (mlp model) inputs) 0
+  in (targetsCat, predsCat)
+
 trainWithLossTracking :: Optimizer o => 
                        [(Tensor, Tensor)]   -- Training data
                     -> [(Tensor, Tensor)]   -- Validation data

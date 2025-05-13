@@ -3,10 +3,7 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 
-module Model
-    ( MLPSpec(..),processTrain
-
-    ) where
+module Model where
 
 import Control.Monad (foldM,when)
 import GHC.Generics (Generic)
@@ -52,16 +49,36 @@ processBatch model optimizer lr (input, label) = do
   pure (newModel, asValue loss)
 
 
-processTrainEpoch :: Optimizer o => [(Tensor, Tensor)] -> MLP -> o -> Float -> Int -> IO (MLP, Float)
-processTrainEpoch dataloader model optimizer lr epoch = do
-    putStrLn $ "Starting Epoch " ++ show epoch
+processTrainEpoch :: Optimizer o => [(Tensor, Tensor)] -> MLP -> o -> Float -> Int  -> IO (MLP, Float)
+processTrainEpoch dataloader model optimizer lr epoch  = do
     foldM (\(m', _) (i, batch) -> do
                         (newModel, loss) <- processBatch m' optimizer lr batch
-                        when (i `mod` 10 == 0) $
-                          putStrLn $ "Epoch " ++ show epoch ++ ", Batch " ++ show i ++ " : loss : " ++ show loss
                         pure (newModel, loss)
                 ) (model, 0.0) (zip [1..] dataloader)
 
-processTrain :: Optimizer o => [(Tensor, Tensor)] -> MLP -> o -> Float -> Int -> IO (MLP, Float)
-processTrain dataloader model optimizer lr epochs = do
-    foldM (\(m, _) epoch -> processTrainEpoch dataloader m optimizer lr epoch) (model, 0.0) [1..epochs]
+
+finalPrediction :: MLP -> Tensor -> (Tensor, Tensor)
+finalPrediction model input = 
+    let output = mlp model input
+    in 
+      (input,output)
+
+
+
+trainWithLossTracking :: Optimizer o => 
+                       [(Tensor, Tensor)]   -- Training data  -- Validation data
+                    -> MLP                  -- Initial model
+                    -> o                    -- Optimizer
+                    -> Float                -- Learning rate
+                    -> Int                  -- Number of epochs
+                    -> Int                  -- Print frequency
+                    -> IO (MLP,  [Float]) --final model, training losses, validation losses
+trainWithLossTracking trainData  initialModel optimizer lr epochs printFreq = do
+    foldM (\(model, trainLosses) epoch -> do
+              (newModel, trainLoss) <- processTrainEpoch trainData model optimizer lr epoch
+              
+              when (epoch `mod` printFreq == 0) $
+                  putStrLn $ "Epoch " ++ show epoch ++ " | Train Loss: " ++ show trainLoss 
+              
+              pure (newModel, trainLoss : trainLosses)
+          ) (initialModel,  []) [1..epochs]

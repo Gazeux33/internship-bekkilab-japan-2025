@@ -108,17 +108,20 @@ executables:
     - -with-rtsopts=-N
   session5-admission:
     main:               AdmissionChances.hs
-    source-dirs: Session5/AdmissionChances
+    source-dirs: 
+    - Session5/AdmissionChances
+    - Session5/Evaluation
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-  session5-evaluation:
-    main:               Evaluation.hs
-    source-dirs: Session5/Evaluation
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+  # session5-evaluation:
+  #   main:               Evaluation.hs
+  #   source-dirs: 
+  #     - Session5/Evaluation
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
 
 
