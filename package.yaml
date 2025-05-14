@@ -101,7 +101,9 @@ executables:
     - -with-rtsopts=-N
   session5-titanic:
     main:               Titanic.hs
-    source-dirs: Session5/Titanic
+    source-dirs: 
+    - Session5/Titanic
+    - Session5/Evaluation
     ghc-options:
     - -threaded
     - -rtsopts
@@ -111,6 +113,14 @@ executables:
     source-dirs: 
     - Session5/AdmissionChances
     - Session5/Evaluation
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+  session5-cifer-mlp:
+    main:               CiferMLP.hs
+    source-dirs: 
+    - Session5/CIFER
     ghc-options:
     - -threaded
     - -rtsopts

@@ -57,11 +57,13 @@ processTrainEpoch dataloader model optimizer lr epoch  = do
                 ) (model, 0.0) (zip [1..] dataloader)
 
 
-finalPrediction :: MLP -> Tensor -> (Tensor, Tensor)
-finalPrediction model input = 
-    let output = mlp model input
-    in 
-      (input,output)
+finalPrediction :: MLP -> [(Tensor, Tensor)] -> (Tensor, Tensor) -- list of target 
+finalPrediction model batches = 
+  let inputs       = map fst batches
+      targets      = map snd batches
+      targetsCat   = F.flattenAll $ FI.cat targets 0 
+      predsCat     = F.flattenAll $ FI.cat (map (mlp model) inputs) 0
+  in (targetsCat, predsCat)
 
 
 

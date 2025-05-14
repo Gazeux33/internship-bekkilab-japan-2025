@@ -4,13 +4,14 @@ import LoadData (loadCSV,dataToTensors,createDataloader)
 import Model 
 import Torch
 import ML.Exp.Chart   (drawLearningCurve) --nlp-tools
+import Evaluation
 
 
 epoch :: Int
-epoch = 3000
+epoch = 2000
 
 batchSize :: Int
-batchSize = 32
+batchSize = 64
 
 learningRate :: Float
 learningRate = 0.0001
@@ -23,22 +24,42 @@ main = do
         Left err -> putStrLn err
         Right rows -> do
             let tensor@(x_tensor,y_tensor) = dataToTensors rows
-            putStrLn $ "Vector Size : " ++ show ( shape x_tensor ) ++ "," ++ show ( shape y_tensor )
             let dataloader = createDataloader tensor batchSize
             putStrLn $ "Dataloader Size : " ++ show (length dataloader )
-            putStrLn $ "Size of one item : (" ++ show (shape ( fst (head dataloader ))) ++ "),(" ++ show (shape ( snd (head dataloader ))) ++ ")"
             
             
-            initialModel <- sample (MLPSpec 7 8 8 1) 
+            initialModel <- sample (MLPSpec 7 16 16 1) 
             let optimizer = mkAdam 10 0.9 0.999 (flattenParameters initialModel)
 
             
             
-            putStrLn $ "Start Train"
-            (finalModel, trainLosses) <- trainWithLossTracking dataloader initialModel optimizer learningRate epoch 20
+            putStrLn $ "Start Train..."
+            (finalModel, trainLosses) <- trainWithLossTracking dataloader initialModel optimizer learningRate epoch 1000
 
             drawLearningCurve "Session5/Titanic/output/titanic-train-curve.png" "Titanic Learning Curve" 
                               [("Training Loss", reverse trainLosses)
                                ]
+
+
+            let (target,pred) = finalPrediction finalModel dataloader
+            let roundPreds = roundTensor pred
+            let roundTargets = roundTensor target
+
+            let acc = accuracy roundTargets roundPreds
+                confusion = multiclassConfusionMatrix roundTargets roundPreds
+                pre = precision roundTargets roundPreds
+                recallModel = recall roundTargets roundPreds
+                f1 = f1Score roundTargets roundPreds
+
+            
+
+            putStrLn $ "Final Accuracy: " ++ show acc
+            putStrLn $ "" 
+            printConfusionMatrix ["Die" , "Survive"] confusion
+            putStrLn $ "" 
+            putStrLn $ "Final Precision: " ++ show pre
+            putStrLn $ "Final Recall: " ++ show recallModel
+            putStrLn $ "Final F1 Score: " ++ show f1
+            
             putStrLn $ "End Train"
 

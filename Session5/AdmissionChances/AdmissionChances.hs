@@ -8,13 +8,13 @@ import Evaluation
 
 
 batchSize :: Int
-batchSize = 16
+batchSize = 4
 
 learningRate :: Float
 learningRate = 0.0001
 
 epoch :: Int
-epoch = 30
+epoch = 20
 
 main :: IO ()
 main = do
@@ -29,15 +29,19 @@ main = do
             
             initialModel <- sample (MLPSpec 7 16 16 1) 
             let optimizer = mkAdam 0 0.9 0.999 (flattenParameters initialModel)
-            
+
 
             (finalModel, trainLosses, validLosses) <- trainWithLossTracking trainDataloader validDataloader initialModel optimizer learningRate epoch 10
 
 
-            drawLearningCurve "Session5/AdmissionChances/output/admission-train-curve.png" "Admission Chances Learning Curve" 
+
+            let filename = "Session5/AdmissionChances/output/admission-lr" ++ show learningRate ++ 
+                          "-e" ++ show epoch ++ 
+                          "-b" ++ show batchSize ++ "-curve.png"
+            drawLearningCurve filename "Admission Chances Learning Curve" 
                               [("Training Loss", reverse trainLosses),
-                              ("Validation Loss", reverse validLosses)
-                               ]
+                               ("Validation Loss", reverse validLosses)
+                              ]
 
             
             putStrLn $ ""
@@ -52,16 +56,11 @@ main = do
             let roundPreds = roundTensor preds
             let roundTargets = roundTensor targets
 
-
-
-            
             let acc = accuracy roundTargets roundPreds
                 confusion = multiclassConfusionMatrix roundTargets roundPreds
                 pre = precision roundTargets roundPreds
                 recallModel = recall roundTargets roundPreds
                 f1 = f1Score roundTargets roundPreds
-
-            
 
             putStrLn $ "Final Accuracy: " ++ show acc
             putStrLn $ "" 
@@ -70,11 +69,6 @@ main = do
             putStrLn $ "Final Precision: " ++ show pre
             putStrLn $ "Final Recall: " ++ show recallModel
             putStrLn $ "Final F1 Score: " ++ show f1
-
-
-
-
-
 
         (Left err, _, _) -> putStrLn $ "Error loading training data: " ++ err
         (_, Left err, _) -> putStrLn $ "Error loading evaluation data: " ++ err
