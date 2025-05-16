@@ -53,6 +53,11 @@ main = do
 
             putStrLn $ ""
             let (targets, preds) = finalPrediction finalModel validDataloader
+
+            putStrLn $ "Final Target: " ++ show targets
+            putStrLn $ "Final Prediction: " ++ show preds
+
+
             let roundPreds = roundTensor preds
             let roundTargets = roundTensor targets
 
