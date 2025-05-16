@@ -53,22 +53,14 @@ Final F1 Score: 0.91525424
 ```
 <br>
 
-## Result
-| **metrics** | **Average**         | **Variance**         |
-|---------------------|-------------------|-------------------|
-|  Eval Loss        | ```32```                | ```32```                |
-|  Accuracy       | ```0.0001 ```           | ```32```                |
-|  Precision             | ```3000```                | ```32```                |
-| Recall         | ```Adam(10 0.9 0.999)``` | ```32```                |
-| F1 Score          |```7 16 16 1``` | ```32```                |
 
-
+<br>
 <br>
 <br>
 
 
 # Titanic 
-<br>
+
 
 ## Launch the program
 
@@ -111,6 +103,42 @@ Final Recall: 0.72289157
 
 Final F1 Score: 0.7350689
 ```
+
+<br>
+<br>
+
+# Survey on Loss Functions
+
+## Negative Log Entropy
+
+**Definition:**  
+Negative log entropy measures the uncertainty of a probability distribution. It is defined as the negative of the entropy.
+
+
+
+**Use cases:**  
+Diversity in model outputs or as a regularization term to avoid overly confident predictions.
+
+
+## Cross Entropy
+
+**Definition:**  
+Cross entropy quantifies the difference between two probability distributions: the true distribution \(p\) and the predicted distribution \(q\):
+
+
+**Use cases:**  
+Standard loss function for classification tasks (binary or multi-class), as it strongly penalizes incorrect predictions.
+
+---
+
+## KL divergence
+
+**Definition:**  
+Kullback-Leibler (KL) divergence measures how one probability distribution \(q\) diverges from a reference distribution \(p\):
+
+
+**Use cases:**  
+Used to compare or regularize distributions (e.g., in semi-supervised learning, variational autoencoders, or model distillation).
 
 # CIFER MLP
 

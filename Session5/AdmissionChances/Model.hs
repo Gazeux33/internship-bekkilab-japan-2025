@@ -99,3 +99,13 @@ trainWithLossTracking trainData validData initialModel optimizer lr epochs print
               pure (newModel, trainLoss : trainLosses, validLoss : validLosses)
           ) (initialModel, [], []) [1..epochs]
 
+
+crossEntropyLoss :: Tensor -> Tensor -> Tensor
+crossEntropyLoss target output = 
+  let
+      weight = ones' [last (shape output)]
+      loss = FI.cross_entropy_loss output target weight 1 (-100) 0.0
+
+    in
+      loss
+  
