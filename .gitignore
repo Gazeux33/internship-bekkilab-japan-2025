@@ -5,3 +5,8 @@
 .vscode/
 .venv/
 *.tar.gz
+*.txt
+*.tsv
+*.params
+*.json
+*.pt

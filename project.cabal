@@ -35,13 +35,17 @@ executable session3-admission
       Session3/AdmissionChances
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -57,13 +61,17 @@ executable session3-graduate
       Session3/Graduate
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -75,13 +83,17 @@ executable session3-linear-regression
       Paths_project
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -93,13 +105,17 @@ executable session3-multiple-x
       Paths_project
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -111,13 +127,17 @@ executable session4-and
       Paths_project
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -129,31 +149,17 @@ executable session4-nand
       Paths_project
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
-    , vector
-  default-language: Haskell2010
-
-executable session4-xor
-  main-is: Session4/XOR.hs
-  other-modules:
-      Paths_project
-  autogen-modules:
-      Paths_project
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , bytestring
-    , cassava
-    , hasktorch
-    , hasktorch-tools
-    , nlp-tools
-    , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -171,13 +177,17 @@ executable session5-admission
       Session5/Evaluation
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -191,13 +201,17 @@ executable session5-cifer-mlp
       Session5/CIFER
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010
 
@@ -215,12 +229,121 @@ executable session5-titanic
       Session5/Evaluation
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
+    , containers
     , hasktorch
     , hasktorch-tools
     , nlp-tools
     , split
+    , text
+    , utf8-string
+    , vector
+  default-language: Haskell2010
+
+executable session6-create-vocab
+  main-is: CreateVocab.hs
+  other-modules:
+      Preprocess
+      Config
+  hs-source-dirs:
+      Session6
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , cassava
+    , containers
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , text
+    , utf8-string
+    , vector
+  default-language: Haskell2010
+
+executable session6-eval-word2vec
+  main-is: EvalModel.hs
+  other-modules:
+      Preprocess
+      Model
+      Embedding
+      MLP
+      Config
+      Evaluation
+  hs-source-dirs:
+      Session6
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , cassava
+    , containers
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , text
+    , utf8-string
+    , vector
+  default-language: Haskell2010
+
+executable session6-word2vec
+  main-is: Word2Vec.hs
+  other-modules:
+      Embedding
+      MLP
+      Model
+      Preprocess
+      Config
+      Evaluation
+  hs-source-dirs:
+      Session6
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , cassava
+    , containers
+    , hasktorch
+    , hasktorch-tools
+    , nlp-tools
+    , split
+    , text
+    , utf8-string
+    , vector
+  default-language: Haskell2010
+
+test-suite test-session6
+  type: exitcode-stdio-1.0
+  main-is: Session6Spec.hs
+  other-modules:
+      Embedding
+      MLP
+      Model
+      Preprocess
+  hs-source-dirs:
+      test/Session6
+      Session6
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , cassava
+    , containers
+    , hasktorch
+    , hasktorch-tools
+    , hspec
+    , nlp-tools
+    , split
+    , text
+    , utf8-string
     , vector
   default-language: Haskell2010

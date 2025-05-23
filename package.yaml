@@ -28,6 +28,10 @@ dependencies:
 - vector
 - nlp-tools
 - split
+- containers
+- utf8-string
+- aeson
+- text
 
 ghc-options:
 - -Wall
@@ -93,12 +97,6 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-  session4-xor:
-    main:               Session4/XOR.hs
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
   session5-titanic:
     main:               Titanic.hs
     source-dirs: 
@@ -125,6 +123,47 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+  session6-word2vec:
+    main:      Word2Vec.hs         
+    source-dirs: 
+    - Session6
+    other-modules:
+    - Embedding
+    - MLP
+    - Model
+    - Preprocess
+    - Config
+    - Evaluation
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+  session6-create-vocab:
+    main:               CreateVocab.hs
+    source-dirs: 
+    - Session6
+    other-modules:
+    - Preprocess
+    - Config
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+  session6-eval-word2vec:
+    main:               EvalModel.hs
+    source-dirs: 
+    - Session6
+    other-modules:
+    - Preprocess
+    - Model
+    - Embedding
+    - MLP
+    - Config
+    - Evaluation
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
   # session5-evaluation:
   #   main:               Evaluation.hs
   #   source-dirs: 
@@ -133,5 +172,36 @@ executables:
   #   - -threaded
   #   - -rtsopts
   #   - -with-rtsopts=-N
+
+
+tests:
+  test-session6:
+    main:                Session6Spec.hs
+    source-dirs:
+      - test/Session6
+      - Session6
+    other-modules:
+      - Embedding
+      - MLP
+      - Model
+      - Preprocess
+    dependencies:
+      - base >= 4.7 && < 5
+      - hasktorch
+      - hasktorch-tools
+      - bytestring
+      - cassava
+      - vector
+      - nlp-tools
+      - split
+      - containers
+      - utf8-string
+      - aeson
+      - hspec
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -Wall
 
 
