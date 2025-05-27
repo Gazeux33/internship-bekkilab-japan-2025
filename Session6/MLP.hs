@@ -40,9 +40,9 @@ instance Randomizable MLPSpec MLP where
 
 mlpForward :: MLP -> Tensor -> Tensor
 mlpForward MLP{..} input =
-  let h0     = F.relu $ linear l0 input
-      h1     = F.relu $ linear l1 h0
-      h2     = F.relu $ linear l2 h1
+  let h0     = F.tanh $ linear l0 input
+      h1     = F.tanh $ linear l1 h0
+      h2     = F.tanh $ linear l2 h1
       logits = linear l3 h2
   in  logits
 

@@ -4,9 +4,10 @@ import Data.List (sortBy)
 import Data.Ord  (comparing)
 import qualified Data.Map.Strict as M
 import qualified Data.ByteString.Lazy as B 
+import qualified Data.ByteString.Lazy.Char8 as C8
 
 import Preprocess
-import Config (fullTextFilePath, vocabPath,maxVocab)
+import Config (fullTextFilePath, vocabPath,maxVocab,smallTextFilePath)
 
 main :: IO ()
 main = do
@@ -20,7 +21,7 @@ main = do
                   $ take maxVocab
                   $ sortBy (flip (comparing snd))
                           (M.toList freqMap)
-      wordlst = sortedWords
+      wordlst = map C8.unpack sortedWords 
 
-  saveToJson wordlst vocabPath
+  writeFile vocabPath (unlines wordlst)
   putStrLn $ "Save to " ++ vocabPath

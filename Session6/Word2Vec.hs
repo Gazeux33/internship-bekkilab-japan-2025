@@ -39,7 +39,7 @@ main = do
   evalData <- loadEvalFile evalFilePath
 
   -- Load the text
-  texts <- B.readFile midTextFilePath
+  texts <- B.readFile smallTextFilePath
   let idxes = map wordToIndex (preprocess texts)
       pairs = createPair idxes windowSize -- [(Center,Context)] [(Int,Int)]
       dataloader = createDataloader pairs batchSize -- [(Tensor,Tensor)]

@@ -10,7 +10,7 @@ smallTextFilePath :: String
 smallTextFilePath = "data/embedding/small_text.txt"
 
 vocabPath :: String
-vocabPath = "data/embedding/vocab.json"
+vocabPath = "data/embedding/vocab.txt"
 
 embdModelPath :: String
 embdModelPath =  "data/embedding/embedding_model.params"
@@ -25,7 +25,7 @@ evalFilePath :: String
 evalFilePath = "data/embedding/answer-answer.test.tsv"
 
 maxVocab :: Int
-maxVocab = 30000
+maxVocab = 20000
 
 embdDim :: Int
 embdDim = 128
@@ -37,10 +37,10 @@ batchSize :: Int
 batchSize = 128
 
 learningRate :: Float
-learningRate = 0.005
+learningRate = 0.01
 
 epoch :: Int
-epoch = 1
+epoch = 100
 
 windowSize :: Int
 windowSize = 2

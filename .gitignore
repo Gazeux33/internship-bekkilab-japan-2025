@@ -10,3 +10,4 @@
 *.params
 *.json
 *.pt
+*.jsonl
