@@ -14,7 +14,7 @@ import Model
 import Preprocess 
 
 amazonReviewPath :: FilePath
-amazonReviewPath = "data/Amazon/train.jsonl"
+amazonReviewPath = "data/Amazon/valid.jsonl"
 
 wordLstPath = "data/embedding/vocab.txt"
 
@@ -29,6 +29,12 @@ main = do
   
   -- load word list (It's important to use the same list as whan creating embeddings)
   wordLst <- fmap (B.split (head $ encode "\n")) (B.readFile wordLstPath)
+  let wordToIndex = wordToIndexFactory wordLst
+      dataset = createDataset reviews wordToIndex
+  putStrLn $ "Number of dataset: " ++ show (length dataset)
+  -- create dataloader
+  let dataloader = createDataloader dataset 32
+  putStrLn $ "Dataloader Size: " ++ show (length dataloader)
 
 
   initModel <- initialize (ModelSpec 9 9)
