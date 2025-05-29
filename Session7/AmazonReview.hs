@@ -9,14 +9,27 @@ module Main (main) where
 import qualified Data.ByteString.Lazy as B
 import Codec.Binary.UTF8.String (encode)
 
-
+import Torch
 import Model
 import Preprocess 
+import Training
 
 amazonReviewPath :: FilePath
 amazonReviewPath = "data/Amazon/valid.jsonl"
 
 wordLstPath = "data/embedding/vocab.txt"
+
+batchSize :: Int
+batchSize = 32
+
+embeddingDim :: Int
+embeddingDim = 128
+
+hDim :: Int
+hDim = 128
+
+nLayers :: Int
+nLayers = 2
 
 main :: IO ()
 main = do
@@ -31,13 +44,24 @@ main = do
   wordLst <- fmap (B.split (head $ encode "\n")) (B.readFile wordLstPath)
   let wordToIndex = wordToIndexFactory wordLst
       dataset = createDataset reviews wordToIndex
+      vocabSize = length wordLst
   putStrLn $ "Number of dataset: " ++ show (length dataset)
-  -- create dataloader
-  let dataloader = createDataloader dataset 32
-  putStrLn $ "Dataloader Size: " ++ show (length dataloader)
+
+  let (x,y) = head dataset
+  putStrLn $ "x shape: " ++ show (shape x)
+  putStrLn $ "y shape: " ++ show (shape y)
 
 
-  initModel <- initialize (ModelSpec 9 9)
+
+  initModel <- initialize (ModelSpec (vocabSize+1) embeddingDim hDim nLayers True (Device CPU 0))
+
+  let (output,hiddenState,logits) = forwardModel initModel x
+
+
+  (newModel, loss) <- trainWithLossTracking dataset initModel GD 0.01 2 1
+  putStrLn $ "Loss after first batch: " ++ show loss
+
+
 
   putStrLn $ "end of main"
 

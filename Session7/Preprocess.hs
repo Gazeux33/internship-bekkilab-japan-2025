@@ -16,6 +16,7 @@ import Data.Word (Word8)
 import Data.Char (toLower)
 import qualified Data.ByteString.Internal as B (c2w)
 import GHC.Generics
+import qualified Torch.Functional.Internal as FI
 
 data AmazonReview = AmazonReview {
   rating :: Float,
@@ -59,8 +60,8 @@ createDataset reviews wordToIndex =
   let texts       = map (\r -> B.pack (encode (text r))) reviews
       ratings     = map (rating) reviews
       wordIndices = map (map wordToIndex . preprocess) texts
-  in zip (map (asTensor) wordIndices)
-        (map asTensor ratings)
+  in zip (map asTensor wordIndices)
+        (map (\x -> FI.unsqueeze (asTensor x) 0 ) ratings)
 
 
 createDataloader ::

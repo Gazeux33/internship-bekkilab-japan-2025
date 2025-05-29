@@ -323,8 +323,10 @@ executable session6-word2vec
 executable session7-amazon-review
   main-is: AmazonReview.hs
   other-modules:
+      MLP
       Model
       Preprocess
+      Training
       Paths_project
   autogen-modules:
       Paths_project
