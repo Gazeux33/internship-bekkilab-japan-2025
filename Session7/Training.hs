@@ -42,8 +42,8 @@ processTrainEpoch dataloader model optimizer lr epoch printFreq existingLosses =
         -- print and draw curve at intervals
         when (i `mod` printFreq == 0) $ do
             putStrLn $ "Epoch " ++ show epoch ++ " | Batch " ++ show i ++ " | Loss: " ++ show lossVal
-            drawLearningCurve "Session7/output/word2vec-training.png"
-                              "Word2Vec Training Losses Curve"
+            drawLearningCurve "Session7/output/rnn-review-training.png"
+                              "RNN review Amazon Losses Curve"
                               [("Training Loss", reverse newLosses)]
                        
         pure (newModel, newLosses)

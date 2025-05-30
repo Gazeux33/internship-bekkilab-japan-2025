@@ -68,10 +68,9 @@ instance Randomizable ModelSpec Model where
 
 forwardModel :: Model -> Tensor -> (Tensor, Tensor,Tensor)
 forwardModel Model{..} inputIds =
-  let -- Récupérer les embeddings en appliquant le champ wordEmbedding sur emb
+  let 
       embeddings = embedding' (toDependent $ wordEmbedding emb) inputIds
       
-      -- Passer par le RNN avec activation tanh
       (output, hiddenStates) = rnnLayers rnn Tanh Nothing (toDependent $ h0s initialStates) embeddings
 
       logits = mlpForward mlp output
