@@ -41,7 +41,7 @@ forwardModel Model{..} inputIds =
 | BatchSize          | ```32```                |
 | LearningRate       | ```0.01```            |
 | Optimizer          | ```GD``` |
-|    VocabSize       | ``` 30 000```                |
+|    VocabSize       | ``` 2 000```                |
 |    seqLen       | ```128 ```                |
 |        emdbDim   | ``` 128```                |
 |        hiddenDim   | ``` 128```                |
